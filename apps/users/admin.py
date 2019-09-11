@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.utils.translation import gettext_lazy
 from users.models import Users
 
 
@@ -8,17 +7,13 @@ from users.models import Users
 
 
 class UserProfileAdmin(UserAdmin):
-    list_display = ('username', 'last_login', 'is_superuser', 'is_staff', 'is_active', 'date_joined')
-    fieldsets = (
-        (None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email')}),
+    # 设置要显示在列表中的字段（id字段是Django模型的默认主键）
+    list_display = ('username', 'last_login', 'is_superuser', 'is_staff', 'area', 'is_active')
 
-        (gettext_lazy('User Information'), {'fields': ('user', 'birthday', 'gender', 'mobile')}),
+    search_fields = ('username',)
 
-        (gettext_lazy('Permissions'), {'fields': ('is_superuser', 'is_staff', 'is_active',
-                                                  'groups', 'user_permissions')}),
-
-        (gettext_lazy('Important dates'), {'fields': ('last_login', 'date_joined')}),
-    )
+    # list_per_page设置每页显示多少条记录，默认是100条
+    list_per_page = 50
 
 
-admin.site.register(Users, UserAdmin)
+admin.site.register(Users, UserProfileAdmin)

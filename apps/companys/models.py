@@ -1,5 +1,7 @@
 from django.db import models
 from db.base_model import BaseModel
+
+
 # Create your models here.
 
 
@@ -12,10 +14,14 @@ class Companys(BaseModel):
     )
     name = models.CharField(max_length=30, verbose_name='公司名')
     type = models.IntegerField(choices=Company_TYPE, verbose_name="公司类型", help_text="公司类型")
-    addr = models.CharField(max_length=100, verbose_name='地址')
+    addr = models.CharField(max_length=100, verbose_name='详细地址')
+    area = models.CharField(max_length=30, blank=True, null=True, verbose_name='区域')
     introduce = models.TextField(blank=True, null=True, verbose_name='介绍')
     personnel = models.IntegerField(default=0, verbose_name='人员')
     company_start_time = models.DateField(null=True, blank=True, verbose_name="成立时间")
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = '公司'
@@ -39,6 +45,9 @@ class Job(BaseModel):
     education = models.IntegerField(choices=Education_TYPE, verbose_name='学历')
     recruitment = models.IntegerField(default=1, verbose_name='招聘人数')
 
+    def __str__(self):
+        return self.job
+
     class Meta:
         verbose_name = '职业'
         verbose_name_plural = verbose_name
@@ -48,6 +57,9 @@ class Welfare(BaseModel):
     """福利"""
     name = models.CharField(max_length=20, verbose_name='名称')
     company = models.ForeignKey(Companys, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = '福利'
