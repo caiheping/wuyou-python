@@ -3,27 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="f644e48a-b03c-4bee-95dd-6d8df6b5fb63" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/wuyou.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wuyou.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/base/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/base/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/base/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/base/migrations/0002_auto_20190910_1748.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/base/migrations/0003_areainfo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/base/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/base/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/base/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/base/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/companys/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/companys/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/companys/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/companys/migrations/0002_auto_20190911_0949.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/companys/migrations/0003_delete_areainfo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/companys/migrations/0002_auto_20190912_1459.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/companys/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/companys/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/resumes/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/resumes/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/resumes/migrations/0001_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/resumes/migrations/0002_resume_user.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/resumes/migrations/0003_auto_20190912_1459.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/resumes/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/resumes/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/users/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/users/migrations/0002_users_area.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/migrations/0002_auto_20190912_1459.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectData/wuyou.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/response.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/response.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wuyou/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/wuyou/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wuyou/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/wuyou/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,13 +30,109 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/base/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="46" lean-forward="true" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
+            <state relative-caret-position="544">
+              <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/wuyou/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="551">
+              <caret line="137" column="46" lean-forward="true" selection-start-line="137" selection-start-column="46" selection-end-line="137" selection-end-column="46" />
+              <folding>
+                <element signature="e#306#315#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/companys/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/companys/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/resumes/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="68" selection-start-line="8" selection-start-column="68" selection-end-line="8" selection-end-column="68" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/users/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="10" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/users/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="38" lean-forward="true" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/resumes/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" column="7" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/base/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,6 +161,9 @@
       <find>HTMLField</find>
       <find>db_table</find>
       <find>TextField</find>
+      <find>AUTH_USER_MODEL</find>
+      <find>区域</find>
+      <find>media</find>
     </findStrings>
     <replaceStrings>
       <replace>base_areainfo</replace>
@@ -88,21 +181,21 @@
         <option value="$PROJECT_DIR$/apps/users/views.py" />
         <option value="$PROJECT_DIR$/db/base_model.py" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/apps/resumes/admin.py" />
         <option value="$PROJECT_DIR$/apps/base/models.py" />
-        <option value="$PROJECT_DIR$/apps/companys/admin.py" />
         <option value="$PROJECT_DIR$/projectData/area.sql" />
-        <option value="$PROJECT_DIR$/apps/users/admin.py" />
         <option value="$PROJECT_DIR$/utils/handleResponse.py" />
-        <option value="$PROJECT_DIR$/apps/resumes/models.py" />
-        <option value="$PROJECT_DIR$/apps/base/admin.py" />
-        <option value="$PROJECT_DIR$/apps/companys/models.py" />
         <option value="$PROJECT_DIR$/apps/base/urls.py" />
         <option value="$PROJECT_DIR$/apps/base/views.py" />
-        <option value="$PROJECT_DIR$/apps/users/models.py" />
         <option value="$PROJECT_DIR$/wuyou/urls.py" />
-        <option value="$PROJECT_DIR$/wuyou/settings.py" />
         <option value="$PROJECT_DIR$/utils/response.py" />
+        <option value="$PROJECT_DIR$/apps/base/admin.py" />
+        <option value="$PROJECT_DIR$/apps/users/models.py" />
+        <option value="$PROJECT_DIR$/apps/companys/models.py" />
+        <option value="$PROJECT_DIR$/apps/companys/admin.py" />
+        <option value="$PROJECT_DIR$/apps/resumes/models.py" />
+        <option value="$PROJECT_DIR$/apps/resumes/admin.py" />
+        <option value="$PROJECT_DIR$/apps/users/admin.py" />
+        <option value="$PROJECT_DIR$/wuyou/settings.py" />
       </list>
     </option>
   </component>
@@ -134,6 +227,19 @@
               <item name="wuyou" type="b2602c69:ProjectViewProjectNode" />
               <item name="wuyou" type="462c0819:PsiDirectoryNode" />
               <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="base" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wuyou" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuyou" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="base" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wuyou" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuyou" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
               <item name="companys" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -142,6 +248,50 @@
               <item name="apps" type="462c0819:PsiDirectoryNode" />
               <item name="companys" type="462c0819:PsiDirectoryNode" />
               <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wuyou" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuyou" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="resumes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wuyou" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuyou" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="resumes" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wuyou" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuyou" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="users" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wuyou" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuyou" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="users" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wuyou" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuyou" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wuyou" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuyou" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wuyou" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wuyou" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="wuyou" type="b2602c69:ProjectViewProjectNode" />
@@ -169,6 +319,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\python-demo\wuyou\static" />
       <recent name="D:\python-demo\wuyou\apps" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -228,7 +379,7 @@
       <option name="presentableId" value="Default" />
       <updated>1568011158587</updated>
       <workItem from="1568011159725" duration="35523000" />
-      <workItem from="1568251728673" duration="13041000" />
+      <workItem from="1568251728673" duration="17448000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1568079563218</created>
@@ -244,30 +395,45 @@
       <option name="project" value="LOCAL" />
       <updated>1568195387409</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="2019-09-12">
+      <created>1568275382828</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1568275382828</updated>
+    </task>
+    <task id="LOCAL-00004" summary="2019-09-12">
+      <created>1568275435767</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1568275435767</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48564000" />
+    <option name="totallyTimeSpent" value="52971000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.47505423" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.18546638" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.25813448" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.22885032" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3275488" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.35683298" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.329718" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -305,7 +471,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="2019-09-11" />
-    <option name="LAST_COMMIT_MESSAGE" value="2019-09-11" />
+    <MESSAGE value="2019-09-12" />
+    <option name="LAST_COMMIT_MESSAGE" value="2019-09-12" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/wuyou/__init__.py">
@@ -372,26 +539,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resumes/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="40" column="22" lean-forward="true" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/users/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="93" selection-start-line="10" selection-start-column="93" selection-end-line="10" selection-end-column="93" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/base_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -429,26 +576,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/resumes/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="111" lean-forward="true" selection-start-line="111" selection-end-line="111" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/companys/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -476,52 +603,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/users/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="61" lean-forward="true" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/companys/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="35" column="18" lean-forward="true" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wuyou/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="23" column="57" lean-forward="true" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="57" />
           <folding>
             <element signature="e#629#661#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/base/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wuyou/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="135" column="37" lean-forward="true" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
-          <folding>
-            <element signature="e#306#315#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -538,10 +625,90 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/base/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="46" lean-forward="true" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
+        <state relative-caret-position="544">
+          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/base/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resumes/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="7" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/resumes/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="68" selection-start-line="8" selection-start-column="68" selection-end-line="8" selection-end-column="68" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/users/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="10" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/users/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="38" lean-forward="true" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/companys/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/companys/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wuyou/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="137" column="46" lean-forward="true" selection-start-line="137" selection-start-column="46" selection-end-line="137" selection-end-column="46" />
+          <folding>
+            <element signature="e#306#315#0" expanded="true" />
           </folding>
         </state>
       </provider>

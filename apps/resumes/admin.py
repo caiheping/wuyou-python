@@ -6,7 +6,7 @@ from resumes.models import Resume, ResumeEducation, ResumeJob, ResumeProjectExpe
 
 
 class ResumeAdmin(admin.ModelAdmin):
-    list_display = ('username', 'name', 'progress', 'user', 'is_open')
+    list_display = ('username', 'name', 'pic', 'progress', 'user', 'is_open')
 
     search_fields = ('username', 'name')
 

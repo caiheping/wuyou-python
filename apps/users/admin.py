@@ -8,7 +8,7 @@ from users.models import Users
 
 class UserProfileAdmin(UserAdmin):
     # 设置要显示在列表中的字段（id字段是Django模型的默认主键）
-    list_display = ('username', 'last_login', 'is_superuser', 'is_staff', 'area', 'is_active')
+    list_display = ('username', 'avatar', 'last_login', 'is_superuser', 'is_staff', 'area', 'is_active')
 
     search_fields = ('username',)
 

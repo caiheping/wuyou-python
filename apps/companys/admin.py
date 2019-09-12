@@ -6,7 +6,7 @@ from companys.models import Companys, Job, Welfare
 
 
 class CompanysAdmin(admin.ModelAdmin):
-    list_display = ('name', 'type', 'addr', 'introduce', 'personnel', 'company_start_time')
+    list_display = ('name', 'type', 'logoImg', 'addr', 'introduce', 'personnel', 'company_start_time')
 
     search_fields = ('name', 'type')
 
@@ -32,3 +32,7 @@ class WelfareAdmin(admin.ModelAdmin):
 admin.site.register(Companys, CompanysAdmin)
 admin.site.register(Job, JobAdmin)
 admin.site.register(Welfare, WelfareAdmin)
+
+admin.site.site_header = '仿无忧管理系统'
+admin.site.site_title = '登录系统后台'
+admin.site.index_title = '后台管理'
