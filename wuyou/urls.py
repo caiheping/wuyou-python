@@ -19,6 +19,7 @@ from django.conf.urls import include, url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url('^ueditor/', include('DjangoUeditor.urls')),  # 富文本编辑器
     url(r'^users/', include('users.urls')),  # 用户模块
     url(r'^companys/', include('companys.urls')),  # 公司模块
     url(r'^resumes/', include('resumes.urls')),  # 简历模块

@@ -12,6 +12,6 @@ class Users(AbstractUser, BaseModel):
         return self.username
 
     class Meta:
-        db_table = 'df_user'
+        # db_table = 'df_user'    # 指定BookInfo生成的数据表名为df_user
         verbose_name = '用户'
         verbose_name_plural = verbose_name

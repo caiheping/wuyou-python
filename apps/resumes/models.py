@@ -1,6 +1,7 @@
 from django.db import models
 from db.base_model import BaseModel
 from users.models import Users
+from DjangoUeditor.models import UEditorField
 
 # Create your models here.
 
@@ -44,7 +45,7 @@ class ResumeWorking(BaseModel):
     end_time = models.DateField(verbose_name='介绍时间')
     company = models.CharField(max_length=30, verbose_name='公司')
     position = models.CharField(max_length=20, verbose_name='职位')
-    job_description = models.TextField(verbose_name='工作描述')
+    job_description = UEditorField(blank=True, verbose_name='工作描述')
     industry = models.CharField(max_length=100, blank=True, null=True, verbose_name='行业')
     department = models.CharField(max_length=30, blank=True, null=True, verbose_name='部门')
     nature = models.CharField(max_length=30, blank=True, null=True, verbose_name='性质')
@@ -97,13 +98,13 @@ class ResumeJob(BaseModel):
     )
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
     place = models.CharField(max_length=30, verbose_name='地点')
-    function = models.TextField(verbose_name='职能')
+    function = UEditorField(blank=True, verbose_name='职能')
     pay_type = models.IntegerField(choices=PayType, default=1, verbose_name='薪资类型')
     salary_expectation = models.IntegerField(verbose_name='期望薪资')
     work_type = models.CharField(max_length=30, blank=True, null=True, verbose_name='工作类型')
     industry = models.CharField(max_length=30, blank=True, null=True, verbose_name='行业')
     arrival_time = models.IntegerField(choices=ArrivalTime, default=1, verbose_name='到岗时间')
-    self_evaluation = models.TextField(blank=True, null=True, verbose_name='自我评价')
+    self_evaluation = UEditorField(blank=True, verbose_name='自我评价')
     personal_tags = models.CharField(max_length=30, blank=True, null=True, verbose_name='个人标签')
 
     def __str__(self):
@@ -120,8 +121,8 @@ class ResumeProjectExperience(BaseModel):
     start_time = models.DateField(verbose_name='开始时间')
     end_time = models.DateField(verbose_name='结束时间')
     name = models.CharField(max_length=30, verbose_name='项目名称')
-    project_description = models.TextField(verbose_name='项目描述')
-    responsibility_description = models.TextField(blank=True, null=True, verbose_name='责任描述')
+    project_description = UEditorField(blank=True, verbose_name='项目描述')
+    responsibility_description = UEditorField(blank=True, verbose_name='责任描述')
     affiliated_company = models.CharField(max_length=30, blank=True, null=True, verbose_name='所属公司')
 
     def __str__(self):

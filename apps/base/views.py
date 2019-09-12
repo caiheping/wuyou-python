@@ -1,8 +1,5 @@
-from django.shortcuts import render
 from django.views.generic import View
-from django.http import JsonResponse
 from base.models import Banner, AreaInfo
-
 from utils.response import HandleResponse
 
 
@@ -17,13 +14,7 @@ class GetArea(View):
             atitle = request.GET.get('atitle')
 
         data = AreaInfo.objects.filter(atitle__contains=atitle)
-        arr = []
-        for item in data:
-            arr.append({
-                'id': item.id,
-                'atitle': item.atitle
-            })
-        return HandleResponse(arr).response_json()
+        return HandleResponse(data).response_json()
 
 
 class GetBanner(View):
@@ -37,3 +28,9 @@ class GetBanner(View):
                 'url': item.url
             })
         return HandleResponse(arr).response_json()
+
+
+class Test(View):
+    def get(self, request):
+        data = ({'a': 'fff'},)
+        return HandleResponse(data).response_json()

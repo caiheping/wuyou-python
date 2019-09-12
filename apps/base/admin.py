@@ -7,6 +7,8 @@ from base.models import Banner, AreaInfo
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('index', 'image', 'url')
 
+    ordering = ('index',)
+
     list_per_page = 50
 
 

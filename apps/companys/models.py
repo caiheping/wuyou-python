@@ -1,5 +1,7 @@
 from django.db import models
 from db.base_model import BaseModel
+from DjangoUeditor.models import UEditorField
+
 
 
 # Create your models here.
@@ -16,8 +18,8 @@ class Companys(BaseModel):
     type = models.IntegerField(choices=Company_TYPE, verbose_name="公司类型", help_text="公司类型")
     addr = models.CharField(max_length=100, verbose_name='详细地址')
     area = models.CharField(max_length=30, blank=True, null=True, verbose_name='区域')
-    introduce = models.TextField(blank=True, null=True, verbose_name='介绍')
-    personnel = models.IntegerField(default=0, verbose_name='人员')
+    introduce = UEditorField(blank=True, verbose_name='介绍')
+    personnel = models.IntegerField(default=1, verbose_name='人员')
     company_start_time = models.DateField(null=True, blank=True, verbose_name="成立时间")
 
     def __str__(self):
@@ -40,7 +42,7 @@ class Job(BaseModel):
     company = models.ForeignKey(Companys, on_delete=models.CASCADE)
     min_salary = models.IntegerField(verbose_name='最小薪水')
     max_salary = models.IntegerField(verbose_name='最大薪水')
-    describe = models.TextField(verbose_name='描述')
+    describe = UEditorField(blank=True, verbose_name='描述')
     working_years = models.IntegerField(verbose_name='工龄')
     education = models.IntegerField(choices=Education_TYPE, verbose_name='学历')
     recruitment = models.IntegerField(default=1, verbose_name='招聘人数')
