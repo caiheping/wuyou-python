@@ -7,7 +7,7 @@ from db.base_model import BaseModel
 class Users(AbstractUser, BaseModel):
     """用户模型类"""
     area = models.CharField(max_length=30, blank=True, null=True, verbose_name='用户所在区域')
-    avatar = models.ImageField(upload_to='media/', verbose_name='头像')
+    avatar = models.ImageField(upload_to='users/', verbose_name='头像')
 
     def __str__(self):
         return self.username

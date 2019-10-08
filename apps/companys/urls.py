@@ -1,6 +1,6 @@
 from django.conf.urls import url
-from users.views import Test
+from companys.views import CompanysView
 
 urlpatterns = [
-    url(r'^test$', Test.as_view(), name='test'),
+    url(r'^companys$', CompanysView.as_view(), name='companys'),
 ]

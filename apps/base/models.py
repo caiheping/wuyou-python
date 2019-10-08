@@ -6,7 +6,7 @@ from db.base_model import BaseModel
 
 class Banner(BaseModel):
     index = models.IntegerField(default=1, verbose_name='索引')
-    image = models.CharField(max_length=100, verbose_name='图片')
+    image = models.ImageField(upload_to='banner/', verbose_name='图片')
     url = models.CharField(max_length=100, blank=True, null=True, verbose_name='链接地址')
 
     class Meta:

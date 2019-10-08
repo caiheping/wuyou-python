@@ -17,7 +17,7 @@ class Resume(BaseModel):
     is_open = models.IntegerField(choices=Is_Open, default=0, verbose_name='是否公开')
     progress = models.IntegerField(default=0, verbose_name='完善进度')
     username = models.CharField(max_length=30, verbose_name='简历用户名')
-    pic = models.ImageField(upload_to='media/', verbose_name='照片')
+    pic = models.ImageField(upload_to='resumes/', verbose_name='照片')
     sex = models.CharField(max_length=6, choices=(('male', '男'), ('female', '女')), default='female', verbose_name='性别')
     birthday = models.DateField(null=True, blank=True, verbose_name='出生年月')
     phone = models.CharField(max_length=11, blank=True, null=True, verbose_name='电话')

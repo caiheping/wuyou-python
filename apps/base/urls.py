@@ -1,8 +1,7 @@
 from django.conf.urls import url
-from base.views import GetArea, GetBanner, Test
+from base.views import AreaView, BannerView
 
 urlpatterns = [
-    url(r'^get_area$', GetArea.as_view(), name='get_area'),
-    url(r'^get_banner$', GetBanner.as_view(), name='get_banner'),
-    url(r'^test$', Test.as_view(), name='test'),
+    url(r'^area$', AreaView.as_view(), name='area'),
+    url(r'^banner$', BannerView.as_view(), name='banner'),
 ]
