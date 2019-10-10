@@ -12,7 +12,7 @@ class Resume(BaseModel):
         (0, '不公开'),
         (1, '公开')
     )
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.OneToOneField(Users, on_delete=models.CASCADE)
     name = models.CharField(max_length=30, verbose_name='简历名称')
     is_open = models.IntegerField(choices=Is_Open, default=0, verbose_name='是否公开')
     progress = models.IntegerField(default=0, verbose_name='完善进度')
@@ -42,7 +42,7 @@ class ResumeWorking(BaseModel):
     """工作经验"""
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
     start_time = models.DateField(verbose_name='开始时间')
-    end_time = models.DateField(verbose_name='介绍时间')
+    end_time = models.DateField(verbose_name='结束时间')
     company = models.CharField(max_length=30, verbose_name='公司')
     position = models.CharField(max_length=20, verbose_name='职位')
     job_description = UEditorField(blank=True, verbose_name='工作描述')

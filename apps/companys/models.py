@@ -33,7 +33,7 @@ class Companys(BaseModel):
 class Job(BaseModel):
     """职业"""
     Education_TYPE = (
-        (1, "高中"),
+        (1, "不限"),
         (2, "大专"),
         (3, "本科"),
         (4, "硕士"),

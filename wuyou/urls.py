@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^users/', include('users.urls')),  # 用户模块
     url(r'^companys/', include('companys.urls')),  # 公司模块
     url(r'^resumes/', include('resumes.urls')),  # 简历模块
-    url(r'^base/', include('base.urls')),  # 简历模块
+    url(r'^base/', include('base.urls')),  # 基础模块
 ]

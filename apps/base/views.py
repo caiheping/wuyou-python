@@ -27,7 +27,7 @@ class BannerView(View):
 
     def get(self, request):
         """查询banner"""
-        data = Banner.objects.all()
+        data = Banner.objects.filter(is_delete=False)
         arr = []
         for item in data:
             arr.append({
@@ -42,9 +42,6 @@ class BannerView(View):
         url = request.POST.get('url')
         image = request.FILES.get('image', None)
 
-        if not all([index, url, image]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
-
         if id:  # 修改
             Banner.objects.filter(id=id).update(
                 index=index,
@@ -53,6 +50,8 @@ class BannerView(View):
             )
             return HandleResponse({}, '修改成功').response_json()
         else:   # 添加
+            if not all([index, url, image]):
+                return HandleResponse({}, '参数错误', 20000).response_json()
             Banner.objects.create(
                 index=index,
                 url=url,
