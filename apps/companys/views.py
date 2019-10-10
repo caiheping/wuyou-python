@@ -1,5 +1,6 @@
 from django.views.generic import View
 from django.core.paginator import Paginator
+from django.conf import settings
 
 from companys.models import Companys, Job, Welfare
 from base.models import AreaInfo
@@ -29,35 +30,47 @@ class CompanysView(View):
                 data_lists = paginator.page(page)
             except Exception as e:
                 return HandleResponse({}, '没有此页码', 30001).response_json()
+            for item in data_lists.object_list:
+                item.logoImg = 'http://'+request.META['HTTP_HOST']+settings.STATIC_URL+str(item.logoImg)
             return HandleResponse(data_lists.object_list).response_json()
 
     def post(self, request):
         id = request.POST.get('id')
         name = request.POST.get('name')
-        logoImg = request.POST.get('logoImg')
-        type = int(request.POST.get('type'))
+        logoImg = request.FILES.get('logoImg')
+        type = request.POST.get('type')
         addr = request.POST.get('addr')
-        area = int(request.POST.get('area'))
+        area = request.POST.get('area')
         introduce = request.POST.get('introduce')
         personnel = request.POST.get('personnel')
         company_start_time = request.POST.get('company_start_time')
 
-        if not all([name, logoImg, type, addr, area, introduce, personnel, company_start_time]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
-
         if id:
-            Companys.objects.filter(id=id).update(
-                name=name,
-                logoImg=logoImg,
-                type=type,
-                addr=addr,
-                area=area,
-                introduce=introduce,
-                personnel=personnel,
-                company_start_time=company_start_time
-            )
+            try:
+                data = Companys.objects.get(id=id)
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
+            if name:
+                data.name = name
+            if logoImg:
+                data.logoImg = logoImg
+            if type:
+                data.type = type
+            if addr:
+                data.addr = addr
+            if area:
+                data.area = AreaInfo.objects.get(id=area)
+            if introduce:
+                data.introduce = introduce
+            if personnel:
+                data.personnel = personnel
+            if company_start_time:
+                data.company_start_time = company_start_time
+            data.save()
             return HandleResponse({}, '修改成功').response_json()
         else:
+            if not all([name, logoImg, type, addr, area, introduce, personnel, company_start_time]):
+                return HandleResponse({}, '参数错误', 20000).response_json()
             Companys.objects.create(
                 name=name,
                 logoImg=logoImg,
@@ -113,21 +126,32 @@ class JobView(View):
         education = request.POST.get('education')
         recruitment = request.POST.get('recruitment')
 
-        if not all([job, company, min_salary, max_salary, describe, working_years, education, recruitment]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
         if id:
-            Job.objects.filter(id=id).update(
-                job=job,
-                company=company,
-                min_salary=min_salary,
-                max_salary=max_salary,
-                describe=describe,
-                working_years=working_years,
-                education=education,
-                recruitment=recruitment
-            )
+            try:
+                data = Job.objects.get(id=id)
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
+            if job:
+                data.job = job
+            if company:
+                data.company = Companys.objects.get(id=company)
+            if min_salary:
+                data.min_salary = min_salary
+            if max_salary:
+                data.max_salary = max_salary
+            if describe:
+                data.describe = describe
+            if working_years:
+                data.working_years = working_years
+            if education:
+                data.education = education
+            if recruitment:
+                data.recruitment = recruitment
+            data.save()
             return HandleResponse({}, '修改成功').response_json()
         else:
+            if not all([job, company, min_salary, max_salary, describe, working_years, education, recruitment]):
+                return HandleResponse({}, '参数错误', 20000).response_json()
             Job.objects.create(
                 job=job,
                 company=Companys.objects.get(id=company),
@@ -166,16 +190,20 @@ class WelfareView(View):
         name = request.POST.get('name')
         company = request.POST.get('company')
 
-        if not all([name, company]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
-
         if id:
-            Welfare.objects.filter(id=id).update(
-                name=name,
-                company=Companys.objects.get(id=company)
-            )
+            try:
+                data = Welfare.objects.get(id=id)
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
+            if name:
+                data.name = name
+            if company:
+                data.company = company
+            data.save()
             return HandleResponse({}, '修改成功').response_json()
         else:
+            if not all([name, company]):
+                return HandleResponse({}, '参数错误', 20000).response_json()
             try:
                 Welfare.objects.create(
                     name=name,

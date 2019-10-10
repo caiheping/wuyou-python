@@ -1,6 +1,7 @@
 from django.views.generic import View
 from base.models import Banner, AreaInfo
 from django.utils.decorators import method_decorator
+from django.conf import settings
 
 from utils.response import HandleResponse
 from utils.my_decorator import MyDecorator
@@ -28,13 +29,9 @@ class BannerView(View):
     def get(self, request):
         """查询banner"""
         data = Banner.objects.filter(is_delete=False)
-        arr = []
         for item in data:
-            arr.append({
-                'image': str(item.image),
-                'url': item.url
-            })
-        return HandleResponse(arr).response_json()
+            item.image = 'http://'+request.META['HTTP_HOST']+settings.STATIC_URL+str(item.image)
+        return HandleResponse(data).response_json()
 
     def post(self, request):
         id = request.POST.get('id', None)
@@ -43,11 +40,17 @@ class BannerView(View):
         image = request.FILES.get('image', None)
 
         if id:  # 修改
-            Banner.objects.filter(id=id).update(
-                index=index,
-                url=url,
-                image=image
-            )
+            try:
+                data = Banner.objects.get(id=id)
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
+            if index:
+                data.index = index
+            if url:
+                data.url = url
+            if image:
+                data.image = image
+            data.save()
             return HandleResponse({}, '修改成功').response_json()
         else:   # 添加
             if not all([index, url, image]):
@@ -61,7 +64,6 @@ class BannerView(View):
 
     def delete(self, request):
         id = request.GET.get('id')
-
         if not all([id]):
             return HandleResponse({}, '参数错误', 20000).response_json()
         Banner.objects.filter(id=id).update(is_delete=True)

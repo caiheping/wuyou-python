@@ -2,6 +2,7 @@ from django.views.generic import View
 from django.http import JsonResponse
 from django.core import serializers
 import json
+from django.conf import settings
 
 from resumes.models import Resume, ResumeWorking, ResumeEducation, ResumeJob, ResumeProjectExperience
 from users.models import Users
@@ -14,7 +15,11 @@ class ShowResumeView(View):
     """显示简历全部信息"""
     def get(self, request):
         id = request.GET.get('id')
-        resume = json.loads(serializers.serialize("json", Resume.objects.filter(id=id, is_delete=False)))
+        try:
+            resume = Resume.objects.filter(id=id, is_delete=False).values()[0]
+            resume['pic'] = 'http://'+request.META['HTTP_HOST']+settings.STATIC_URL+resume['pic']
+        except:
+            return HandleResponse({}, '服务器错误', 20000).response_json()
         resumeWorking = json.loads(serializers.serialize("json", ResumeWorking.objects.filter(resume__id=id, is_delete=False)))
         resumeEducation = json.loads(serializers.serialize("json", ResumeEducation.objects.filter(resume__id=id, is_delete=False)))
         resumeJob = json.loads(serializers.serialize("json", ResumeJob.objects.filter(resume__id=id, is_delete=False)))
@@ -61,52 +66,77 @@ class ResumeView(View):
         hukou_or_nationality = request.POST.get('hukou_or_nationality', None)
         marital_status = request.POST.get('marital_status', 0)
 
-        if not all([u_id, name, username, pic, addr]):
+        if not all([u_id]):
             return HandleResponse({}, '参数错误', 20000).response_json()
 
         is_exist = Resume.objects.filter(user__id=u_id)
 
         if is_exist:
-            Resume.objects.filter(user__id=u_id).update(
-                name=name,
-                is_open=is_open,
-                progress=progress,
-                username=username,
-                pic=pic,
-                sex=sex,
-                birthday=birthday,
-                phone=phone,
-                status=status,
-                start_working=start_working,
-                addr=addr,
-                email=email,
-                ID_number=ID_number,
-                annual_income=annual_income,
-                hukou_or_nationality=hukou_or_nationality,
-                marital_status=marital_status,
-            )
+            try:
+                data = Resume.objects.get(user__id=u_id)
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
+            if name:
+                data.name = name
+            if is_open:
+                data.is_open = is_open
+            if progress:
+                data.progress = progress
+            if username:
+                data.username = username
+            if pic:
+                data.pic = pic
+            if sex:
+                data.sex = sex
+            if birthday:
+                data.birthday = birthday
+            if phone:
+                data.phone = phone
+            if status:
+                data.status = status
+            if start_working:
+                data.start_working = start_working
+            if addr:
+                data.addr = addr
+            if email:
+                data.email = email
+            if ID_number:
+                data.ID_number = ID_number
+            if annual_income:
+                data.annual_income = annual_income
+            if hukou_or_nationality:
+                data.hukou_or_nationality = hukou_or_nationality
+            if marital_status:
+                data.marital_status = marital_status
+            data.save()
             return HandleResponse({}, '修改成功').response_json()
         else:
-            Resume.objects.create(
-                user=Users.objects.get(id=u_id),
-                name=name,
-                is_open=is_open,
-                progress=progress,
-                username=username,
-                pic=pic,
-                sex=sex,
-                birthday=birthday,
-                phone=phone,
-                status=status,
-                start_working=start_working,
-                addr=addr,
-                email=email,
-                ID_number=ID_number,
-                annual_income=annual_income,
-                hukou_or_nationality=hukou_or_nationality,
-                marital_status=marital_status,
-            )
-            return HandleResponse({}, '添加成功').response_json()
+            if not all([u_id, name, username, pic, addr]):
+                return HandleResponse({}, '参数错误', 20000).response_json()
+
+            try:
+                Resume.objects.create(
+                    user=Users.objects.get(id=u_id),
+                    name=name,
+                    is_open=is_open,
+                    progress=progress,
+                    username=username,
+                    pic=pic,
+                    sex=sex,
+                    birthday=birthday,
+                    phone=phone,
+                    status=status,
+                    start_working=start_working,
+                    addr=addr,
+                    email=email,
+                    ID_number=ID_number,
+                    annual_income=annual_income,
+                    hukou_or_nationality=hukou_or_nationality,
+                    marital_status=marital_status,
+                )
+                return HandleResponse({}, '添加成功').response_json()
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
 
     def delete(self, request):
         id = request.GET.get('id')
@@ -148,39 +178,57 @@ class ResumeWorkingView(View):
         other = request.POST.get('other', None)
         type = request.POST.get('type', None)
 
-        if not all([resume_id, start_time, end_time, company, position, job_description]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
-
         if id:
-            ResumeWorking.objects.filter(id=id).update(
-                resume=Resume.objects.get(id=resume_id),
-                start_time=start_time,
-                end_time=end_time,
-                company=company,
-                position=position,
-                job_description=job_description,
-                industry=industry,
-                department=department,
-                nature=nature,
-                other=other,
-                type=type,
-            )
+            if not all([resume_id]):
+                return HandleResponse({}, '参数错误', 20000).response_json()
+            try:
+                data = ResumeWorking.objects.get(id=id)
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
+
+            data.resume = Resume.objects.get(id=resume_id)
+            if start_time:
+                data.start_time = start_time
+            if end_time:
+                data.end_time = end_time
+            if company:
+                data.company = company
+            if position:
+                data.position = position
+            if job_description:
+                data.job_description = job_description
+            if industry:
+                data.industry = industry
+            if department:
+                data.department = department
+            if nature:
+                data.nature = nature
+            if other:
+                data.other = other
+            if type:
+                data.type = type
+            data.save()
             return HandleResponse({}, '修改成功').response_json()
         else:
-            ResumeWorking.objects.create(
-                resume=Resume.objects.get(id=resume_id),
-                start_time=start_time,
-                end_time=end_time,
-                company=company,
-                position=position,
-                job_description=job_description,
-                industry=industry,
-                department=department,
-                nature=nature,
-                other=other,
-                type=type,
-            )
-            return HandleResponse({}, '添加成功').response_json()
+            if not all([resume_id, start_time, end_time, company, position, job_description]):
+                return HandleResponse({}, '参数错误', 20000).response_json()
+            try:
+                ResumeWorking.objects.create(
+                    resume=Resume.objects.get(id=resume_id),
+                    start_time=start_time,
+                    end_time=end_time,
+                    company=company,
+                    position=position,
+                    job_description=job_description,
+                    industry=industry,
+                    department=department,
+                    nature=nature,
+                    other=other,
+                    type=type,
+                )
+                return HandleResponse({}, '添加成功').response_json()
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
 
     def delete(self, request):
         id = request.GET.get('id')
@@ -219,33 +267,48 @@ class ResumeEducationView(View):
         major_desc = request.POST.get('major_desc', None)
         is_overseas_study = request.POST.get('is_overseas_study', 0)
 
-        if not all([resume_id, enrollment_time, graduation_time, school, major]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
-
         if id:
-            ResumeEducation.objects.filter(id=id).update(
-                resume=Resume.objects.get(id=resume_id),
-                enrollment_time=enrollment_time,
-                graduation_time=graduation_time,
-                school=school,
-                education=education,
-                major=major,
-                major_desc=major_desc,
-                is_overseas_study=is_overseas_study,
-            )
+            if not all([resume_id]):
+                return HandleResponse({}, '参数错误', 20000).response_json()
+            try:
+                data = ResumeEducation.objects.get(id=id)
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
+            data.resume = Resume.objects.get(id=resume_id)
+            if enrollment_time:
+                data.enrollment_time = enrollment_time
+            if graduation_time:
+                data.graduation_time = graduation_time
+            if school:
+                data.school = school
+            if education:
+                data.education = education
+            if major:
+                data.major = major
+            if major_desc:
+                data.major_desc = major_desc
+            if is_overseas_study:
+                data.is_overseas_study = is_overseas_study
+
+            data.save()
             return HandleResponse({}, '修改成功').response_json()
         else:
-            ResumeEducation.objects.create(
-                resume=Resume.objects.get(id=resume_id),
-                enrollment_time=enrollment_time,
-                graduation_time=graduation_time,
-                school=school,
-                education=education,
-                major=major,
-                major_desc=major_desc,
-                is_overseas_study=is_overseas_study,
-            )
-            return HandleResponse({}, '添加成功').response_json()
+            if not all([resume_id, enrollment_time, graduation_time, school, major]):
+                return HandleResponse({}, '参数错误', 20000).response_json()
+            try:
+                ResumeEducation.objects.create(
+                    resume=Resume.objects.get(id=resume_id),
+                    enrollment_time=enrollment_time,
+                    graduation_time=graduation_time,
+                    school=school,
+                    education=education,
+                    major=major,
+                    major_desc=major_desc,
+                    is_overseas_study=is_overseas_study,
+                )
+                return HandleResponse({}, '添加成功').response_json()
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
 
     def delete(self, request):
         id = request.GET.get('id')
@@ -286,37 +349,53 @@ class ResumeJobView(View):
         self_evaluation = request.POST.get('self_evaluation')
         personal_tags = request.POST.get('personal_tags', None)
 
-        if not all([resume_id, place, function, salary_expectation, self_evaluation]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
-
         if id:
-            ResumeJob.objects.filter(id=id).update(
-                resume=Resume.objects.get(id=resume_id),
-                place=place,
-                function=function,
-                pay_type=pay_type,
-                salary_expectation=salary_expectation,
-                work_type=work_type,
-                industry=industry,
-                arrival_time=arrival_time,
-                self_evaluation=self_evaluation,
-                personal_tags=personal_tags,
-            )
+            if not all([resume_id]):
+                return HandleResponse({}, '参数错误', 20000).response_json()
+            try:
+                data = ResumeJob.objects.get(id=id)
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
+            data.resume = Resume.objects.get(id=resume_id)
+            if place:
+                data.place = place
+            if function:
+                data.function = function
+            if pay_type:
+                data.pay_type = pay_type
+            if salary_expectation:
+                data.salary_expectation = salary_expectation
+            if work_type:
+                data.work_type = work_type
+            if industry:
+                data.industry = industry
+            if arrival_time:
+                data.arrival_time = arrival_time
+            if self_evaluation:
+                data.self_evaluation = self_evaluation
+            if personal_tags:
+                data.personal_tags = personal_tags
+            data.save()
             return HandleResponse({}, '修改成功').response_json()
         else:
-            ResumeJob.objects.create(
-                resume=Resume.objects.get(id=resume_id),
-                place=place,
-                function=function,
-                pay_type=pay_type,
-                salary_expectation=salary_expectation,
-                work_type=work_type,
-                industry=industry,
-                arrival_time=arrival_time,
-                self_evaluation=self_evaluation,
-                personal_tags=personal_tags,
-            )
-            return HandleResponse({}, '添加成功').response_json()
+            if not all([resume_id, place, function, salary_expectation, self_evaluation]):
+                return HandleResponse({}, '参数错误', 20000).response_json()
+            try:
+                ResumeJob.objects.create(
+                    resume=Resume.objects.get(id=resume_id),
+                    place=place,
+                    function=function,
+                    pay_type=pay_type,
+                    salary_expectation=salary_expectation,
+                    work_type=work_type,
+                    industry=industry,
+                    arrival_time=arrival_time,
+                    self_evaluation=self_evaluation,
+                    personal_tags=personal_tags,
+                )
+                return HandleResponse({}, '添加成功').response_json()
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
 
     def delete(self, request):
         id = request.GET.get('id')
@@ -354,31 +433,44 @@ class ResumeProjectExperienceView(View):
         responsibility_description = request.POST.get('responsibility_description')
         affiliated_company = request.POST.get('affiliated_company', None)
 
-        if not all([resume_id, start_time, end_time, name, project_description, responsibility_description]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
-
         if id:
-            ResumeProjectExperience.objects.filter(id=id).update(
-                resume=Resume.objects.get(id=resume_id),
-                start_time=start_time,
-                end_time=end_time,
-                name=name,
-                project_description=project_description,
-                responsibility_description=responsibility_description,
-                affiliated_company=affiliated_company,
-            )
+            if not all([resume_id]):
+                return HandleResponse({}, '参数错误', 20000).response_json()
+            try:
+                data = ResumeProjectExperience.objects.get(id=id)
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
+            data.resume = Resume.objects.get(id=resume_id)
+            if start_time:
+                data.start_time = start_time
+            if end_time:
+                data.end_time = end_time
+            if name:
+                data.name = name
+            if project_description:
+                data.project_description = project_description
+            if responsibility_description:
+                data.responsibility_description = responsibility_description
+            if affiliated_company:
+                data.affiliated_company = affiliated_company
+            data.save()
             return HandleResponse({}, '修改成功').response_json()
         else:
-            ResumeProjectExperience.objects.create(
-                resume=Resume.objects.get(id=resume_id),
-                start_time=start_time,
-                end_time=end_time,
-                name=name,
-                project_description=project_description,
-                responsibility_description=responsibility_description,
-                affiliated_company=affiliated_company,
-            )
-            return HandleResponse({}, '添加成功').response_json()
+            if not all([resume_id, start_time, end_time, name, project_description, responsibility_description]):
+                return HandleResponse({}, '参数错误', 20000).response_json()
+            try:
+                ResumeProjectExperience.objects.create(
+                    resume=Resume.objects.get(id=resume_id),
+                    start_time=start_time,
+                    end_time=end_time,
+                    name=name,
+                    project_description=project_description,
+                    responsibility_description=responsibility_description,
+                    affiliated_company=affiliated_company,
+                )
+                return HandleResponse({}, '添加成功').response_json()
+            except:
+                return HandleResponse({}, '服务器错误', 40000).response_json()
 
     def delete(self, request):
         id = request.GET.get('id')

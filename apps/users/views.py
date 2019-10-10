@@ -1,7 +1,7 @@
-from django.shortcuts import render
 from django.views.generic import View
-from django.http import JsonResponse
 from django.contrib.auth import login, logout, authenticate
+from django.conf import settings
+
 from users.models import Users
 
 from utils.response import HandleResponse
@@ -10,12 +10,8 @@ from utils.response import HandleResponse
 # Create your views here.
 
 
-class Test(View):
-    def get(self, request):
-        return JsonResponse({'code': '0', 'date': 'successs'})
-
-
 class Login(View):
+    """登录"""
     def post(self, request):
         # 接收数据
         username = request.POST.get('username')
@@ -36,10 +32,14 @@ class Login(View):
 
                 # 返回response
                 data = Users.objects.get(username=username)
+                if data.avatar:
+                    avatar = 'http://' + request.META['HTTP_HOST'] + settings.STATIC_URL + str(data.avatar)
+                else:
+                    avatar = str(data.avatar)
                 return_data = {
                     "username": data.username,
                     "email": data.email,
-                    "avatar": str(data.avatar),
+                    "avatar": avatar,
                     "area": data.area
                 }
                 return HandleResponse(return_data, '登录成功').response_json()
@@ -52,6 +52,7 @@ class Login(View):
 
 
 class Logout(View):
+    """登出"""
     def post(self, request):
         logout(request)
         return HandleResponse({}, '登出成功').response_json()
