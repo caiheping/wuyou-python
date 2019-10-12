@@ -6,7 +6,7 @@ from django.conf import settings
 
 from resumes.models import Resume, ResumeWorking, ResumeEducation, ResumeJob, ResumeProjectExperience
 from users.models import Users
-from utils.response import HandleResponse
+from utils.response import HttpResponseJson
 
 # Create your views here.
 
@@ -19,18 +19,22 @@ class ShowResumeView(View):
             resume = Resume.objects.filter(id=id, is_delete=False).values()[0]
             resume['pic'] = 'http://'+request.META['HTTP_HOST']+settings.STATIC_URL+resume['pic']
         except:
-            return HandleResponse({}, '服务器错误', 20000).response_json()
+            return HttpResponseJson(status=500, code=50000).json()
         resumeWorking = json.loads(serializers.serialize("json", ResumeWorking.objects.filter(resume__id=id, is_delete=False)))
         resumeEducation = json.loads(serializers.serialize("json", ResumeEducation.objects.filter(resume__id=id, is_delete=False)))
         resumeJob = json.loads(serializers.serialize("json", ResumeJob.objects.filter(resume__id=id, is_delete=False)))
         resumeProjectExperience = json.loads(serializers.serialize("json", ResumeProjectExperience.objects.filter(resume__id=id, is_delete=False)))
 
         obj = {
-            "resume": resume,
-            "resumeWorking": resumeWorking,
-            "resumeEducation": resumeEducation,
-            "resumeJob": resumeJob,
-            "resumeProjectExperience": resumeProjectExperience,
+            "code": 20000,
+            "data": {
+                "resume": resume,
+                "resumeWorking": resumeWorking,
+                "resumeEducation": resumeEducation,
+                "resumeJob": resumeJob,
+                "resumeProjectExperience": resumeProjectExperience,
+            },
+            "status": 200
         }
         return JsonResponse(obj, safe=False)
 
@@ -40,12 +44,12 @@ class ResumeView(View):
     def get(self, request):
         id = request.GET.get('id')
         if not all([id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         try:
             data = Resume.objects.filter(id=id, is_delete=False).values()[0]
-            return HandleResponse(data).response_json()
+            return HttpResponseJson(data).json()
         except Exception as e:
-            return HandleResponse({}, '没有此记录', 30002).response_json()
+            return HttpResponseJson(status=500, code=50001).json()
 
     def post(self, request):
         u_id = request.POST.get('u_id')
@@ -67,7 +71,7 @@ class ResumeView(View):
         marital_status = request.POST.get('marital_status', 0)
 
         if not all([u_id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
 
         is_exist = Resume.objects.filter(user__id=u_id)
 
@@ -75,7 +79,7 @@ class ResumeView(View):
             try:
                 data = Resume.objects.get(user__id=u_id)
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
+                return HttpResponseJson(status=500, code=50000).json()
             if name:
                 data.name = name
             if is_open:
@@ -109,10 +113,10 @@ class ResumeView(View):
             if marital_status:
                 data.marital_status = marital_status
             data.save()
-            return HandleResponse({}, '修改成功').response_json()
+            return HttpResponseJson(data='修改成功').json()
         else:
             if not all([u_id, name, username, pic, addr]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
 
             try:
                 Resume.objects.create(
@@ -134,17 +138,17 @@ class ResumeView(View):
                     hukou_or_nationality=hukou_or_nationality,
                     marital_status=marital_status,
                 )
-                return HandleResponse({}, '添加成功').response_json()
+                return HttpResponseJson(data='添加成功').json()
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
+                return HttpResponseJson(status=500, code=50000).json()
 
     def delete(self, request):
         id = request.GET.get('id')
 
         if not all([id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         Resume.objects.filter(id=id).update(is_delete=True)
-        return HandleResponse({}, '删除成功').response_json()
+        return HttpResponseJson(data='删除成功').json()
 
 
 class ResumeWorkingView(View):
@@ -153,16 +157,16 @@ class ResumeWorkingView(View):
         id = request.GET.get('id')
         resume_id = request.GET.get('resume_id')
         if not all([resume_id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         if id:
             try:
                 data = ResumeWorking.objects.filter(id=id, resume__id=resume_id, is_delete=False).values()[0]
-                return HandleResponse(data).response_json()
+                return HttpResponseJson(data).json()
             except Exception as e:
-                return HandleResponse({}, '没有此记录', 30002).response_json()
+                return HttpResponseJson(status=500, code=50001).json()
         else:
             data = ResumeWorking.objects.filter(resume__id=resume_id, is_delete=False)
-            return HandleResponse(data).response_json()
+            return HttpResponseJson(data).json()
 
     def post(self, request):
         id = request.POST.get('id')
@@ -180,13 +184,13 @@ class ResumeWorkingView(View):
 
         if id:
             if not all([resume_id]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
             try:
                 data = ResumeWorking.objects.get(id=id)
+                data.resume = Resume.objects.get(id=resume_id)
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
+                return HttpResponseJson(status=500, code=50001).json()
 
-            data.resume = Resume.objects.get(id=resume_id)
             if start_time:
                 data.start_time = start_time
             if end_time:
@@ -208,10 +212,10 @@ class ResumeWorkingView(View):
             if type:
                 data.type = type
             data.save()
-            return HandleResponse({}, '修改成功').response_json()
+            return HttpResponseJson(data='修改成功').json()
         else:
             if not all([resume_id, start_time, end_time, company, position, job_description]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
             try:
                 ResumeWorking.objects.create(
                     resume=Resume.objects.get(id=resume_id),
@@ -226,17 +230,17 @@ class ResumeWorkingView(View):
                     other=other,
                     type=type,
                 )
-                return HandleResponse({}, '添加成功').response_json()
+                return HttpResponseJson(data='添加成功').json()
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
+                return HttpResponseJson(status=500, code=50000).json()
 
     def delete(self, request):
         id = request.GET.get('id')
 
         if not all([id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         ResumeWorking.objects.filter(id=id).update(is_delete=True)
-        return HandleResponse({}, '删除成功').response_json()
+        return HttpResponseJson(data='删除成功').json()
 
 
 class ResumeEducationView(View):
@@ -245,16 +249,16 @@ class ResumeEducationView(View):
         id = request.GET.get('id')
         resume_id = request.GET.get('resume_id')
         if not all([resume_id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         if id:
             try:
                 data = ResumeEducation.objects.filter(id=id, resume__id=resume_id, is_delete=False).values()[0]
-                return HandleResponse(data).response_json()
+                return HttpResponseJson(data).json()
             except Exception as e:
-                return HandleResponse({}, '没有此记录', 30002).response_json()
+                return HttpResponseJson(status=500, code=50001).json()
         else:
             data = ResumeEducation.objects.filter(resume__id=resume_id, is_delete=False)
-            return HandleResponse(data).response_json()
+            return HttpResponseJson(data).json()
 
     def post(self, request):
         id = request.POST.get('id')
@@ -269,12 +273,12 @@ class ResumeEducationView(View):
 
         if id:
             if not all([resume_id]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
             try:
                 data = ResumeEducation.objects.get(id=id)
+                data.resume = Resume.objects.get(id=resume_id)
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
-            data.resume = Resume.objects.get(id=resume_id)
+                return HttpResponseJson(status=500, code=50001).json()
             if enrollment_time:
                 data.enrollment_time = enrollment_time
             if graduation_time:
@@ -291,10 +295,10 @@ class ResumeEducationView(View):
                 data.is_overseas_study = is_overseas_study
 
             data.save()
-            return HandleResponse({}, '修改成功').response_json()
+            return HttpResponseJson(data='修改成功').json()
         else:
             if not all([resume_id, enrollment_time, graduation_time, school, major]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
             try:
                 ResumeEducation.objects.create(
                     resume=Resume.objects.get(id=resume_id),
@@ -306,17 +310,17 @@ class ResumeEducationView(View):
                     major_desc=major_desc,
                     is_overseas_study=is_overseas_study,
                 )
-                return HandleResponse({}, '添加成功').response_json()
+                return HttpResponseJson(data='添加成功').json()
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
+                return HttpResponseJson(status=500, code=50000).json()
 
     def delete(self, request):
         id = request.GET.get('id')
 
         if not all([id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         ResumeEducation.objects.filter(id=id).update(is_delete=True)
-        return HandleResponse({}, '删除成功').response_json()
+        return HttpResponseJson(data='删除成功').json()
 
 
 class ResumeJobView(View):
@@ -325,16 +329,16 @@ class ResumeJobView(View):
         id = request.GET.get('id')
         resume_id = request.GET.get('resume_id')
         if not all([resume_id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         if id:
             try:
                 data = ResumeJob.objects.filter(id=id, resume__id=resume_id, is_delete=False).values()[0]
-                return HandleResponse(data).response_json()
+                return HttpResponseJson(data).json()
             except Exception as e:
-                return HandleResponse({}, '没有此记录', 30002).response_json()
+                return HttpResponseJson(status=500, code=50001).json()
         else:
             data = ResumeJob.objects.filter(resume__id=resume_id, is_delete=False)
-            return HandleResponse(data).response_json()
+            return HttpResponseJson(data).json()
 
     def post(self, request):
         id = request.POST.get('id')
@@ -351,12 +355,13 @@ class ResumeJobView(View):
 
         if id:
             if not all([resume_id]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
             try:
                 data = ResumeJob.objects.get(id=id)
+                data.resume = Resume.objects.get(id=resume_id)
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
-            data.resume = Resume.objects.get(id=resume_id)
+                return HttpResponseJson(status=500, code=50000).json()
+
             if place:
                 data.place = place
             if function:
@@ -376,10 +381,10 @@ class ResumeJobView(View):
             if personal_tags:
                 data.personal_tags = personal_tags
             data.save()
-            return HandleResponse({}, '修改成功').response_json()
+            return HttpResponseJson(data='修改成功').json()
         else:
             if not all([resume_id, place, function, salary_expectation, self_evaluation]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
             try:
                 ResumeJob.objects.create(
                     resume=Resume.objects.get(id=resume_id),
@@ -393,17 +398,17 @@ class ResumeJobView(View):
                     self_evaluation=self_evaluation,
                     personal_tags=personal_tags,
                 )
-                return HandleResponse({}, '添加成功').response_json()
+                return HttpResponseJson(data='添加成功').json()
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
+                return HttpResponseJson(status=500, code=50000).json()
 
     def delete(self, request):
         id = request.GET.get('id')
 
         if not all([id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         ResumeJob.objects.filter(id=id).update(is_delete=True)
-        return HandleResponse({}, '删除成功').response_json()
+        return HttpResponseJson(data='删除成功').json()
 
 
 class ResumeProjectExperienceView(View):
@@ -412,16 +417,16 @@ class ResumeProjectExperienceView(View):
         id = request.GET.get('id')
         resume_id = request.GET.get('resume_id')
         if not all([resume_id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         if id:
             try:
                 data = ResumeProjectExperience.objects.filter(id=id, resume__id=resume_id, is_delete=False).values()[0]
-                return HandleResponse(data).response_json()
+                return HttpResponseJson(data).json()
             except Exception as e:
-                return HandleResponse({}, '没有此记录', 30002).response_json()
+                return HttpResponseJson(status=500, code=50001).json()
         else:
             data = ResumeProjectExperience.objects.filter(resume__id=resume_id, is_delete=False)
-            return HandleResponse(data).response_json()
+            return HttpResponseJson(data).json()
 
     def post(self, request):
         id = request.POST.get('id')
@@ -435,12 +440,13 @@ class ResumeProjectExperienceView(View):
 
         if id:
             if not all([resume_id]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
             try:
                 data = ResumeProjectExperience.objects.get(id=id)
+                data.resume = Resume.objects.get(id=resume_id)
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
-            data.resume = Resume.objects.get(id=resume_id)
+                return HttpResponseJson(status=500, code=50001).json()
+
             if start_time:
                 data.start_time = start_time
             if end_time:
@@ -454,10 +460,10 @@ class ResumeProjectExperienceView(View):
             if affiliated_company:
                 data.affiliated_company = affiliated_company
             data.save()
-            return HandleResponse({}, '修改成功').response_json()
+            return HttpResponseJson(data='修改成功').json()
         else:
             if not all([resume_id, start_time, end_time, name, project_description, responsibility_description]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
             try:
                 ResumeProjectExperience.objects.create(
                     resume=Resume.objects.get(id=resume_id),
@@ -468,14 +474,14 @@ class ResumeProjectExperienceView(View):
                     responsibility_description=responsibility_description,
                     affiliated_company=affiliated_company,
                 )
-                return HandleResponse({}, '添加成功').response_json()
+                return HttpResponseJson(data='添加成功').json()
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
+                return HttpResponseJson(status=500, code=50000).json()
 
     def delete(self, request):
         id = request.GET.get('id')
 
         if not all([id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         ResumeProjectExperience.objects.filter(id=id).update(is_delete=True)
-        return HandleResponse({}, '删除成功').response_json()
+        return HttpResponseJson(data='删除成功').json()

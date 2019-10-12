@@ -4,7 +4,7 @@ from django.conf import settings
 
 from companys.models import Companys, Job, Welfare
 from base.models import AreaInfo
-from utils.response import HandleResponse
+from utils.response import HttpResponseJson
 
 # Create your views here.
 
@@ -18,21 +18,21 @@ class CompanysView(View):
         if id:
             try:
                 data = Companys.objects.filter(id=id, is_delete=False).values()[0]
-                return HandleResponse(data).response_json()
+                return HttpResponseJson(data).json()
             except Exception as e:
-                return HandleResponse({}, '没有此记录', 30002).response_json()
+                return HttpResponseJson(status=500, code=50001).json()
         else:
             if not all([page, limit]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
             data = Companys.objects.filter(is_delete=False).order_by('-create_time')
             paginator = Paginator(data, limit)
             try:
                 data_lists = paginator.page(page)
             except Exception as e:
-                return HandleResponse({}, '没有此页码', 30001).response_json()
+                return HttpResponseJson(status=400, code=40001).json()
             for item in data_lists.object_list:
                 item.logoImg = 'http://'+request.META['HTTP_HOST']+settings.STATIC_URL+str(item.logoImg)
-            return HandleResponse(data_lists.object_list).response_json()
+            return HttpResponseJson(data=data_lists.object_list).json()
 
     def post(self, request):
         id = request.POST.get('id')
@@ -49,7 +49,7 @@ class CompanysView(View):
             try:
                 data = Companys.objects.get(id=id)
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
+                return HttpResponseJson(status=500, code=50001).json()
             if name:
                 data.name = name
             if logoImg:
@@ -67,10 +67,10 @@ class CompanysView(View):
             if company_start_time:
                 data.company_start_time = company_start_time
             data.save()
-            return HandleResponse({}, '修改成功').response_json()
+            return HttpResponseJson(data='修改成功').json()
         else:
             if not all([name, logoImg, type, addr, area, introduce, personnel, company_start_time]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
             Companys.objects.create(
                 name=name,
                 logoImg=logoImg,
@@ -81,15 +81,15 @@ class CompanysView(View):
                 personnel=personnel,
                 company_start_time=company_start_time
             )
-            return HandleResponse({}, '添加成功').response_json()
+            return HttpResponseJson(data='添加成功').json()
 
     def delete(self, request):
         id = request.GET.get('id')
 
         if not all([id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         Companys.objects.filter(id=id).update(is_delete=True)
-        return HandleResponse({}, '删除成功').response_json()
+        return HttpResponseJson(data='删除成功').json()
 
 
 class JobView(View):
@@ -101,19 +101,19 @@ class JobView(View):
         if id:
             try:
                 data = Job.objects.filter(id=id, is_delete=False).values()[0]
-                return HandleResponse(data).response_json()
-            except Exception as e:
-                return HandleResponse({}, '没有此记录', 30002).response_json()
+                return HttpResponseJson(data).json()
+            except:
+                return HttpResponseJson(status=500, code=50001).json()
         else:
             if not all([page, limit]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
             data = Job.objects.filter(is_delete=False).order_by('-create_time')
             paginator = Paginator(data, limit)
             try:
                 data_lists = paginator.page(page)
             except Exception as e:
-                return HandleResponse({}, '没有此页码', 30001).response_json()
-            return HandleResponse(data_lists.object_list).response_json()
+                return HttpResponseJson(status=400, code=40001).json()
+            return HttpResponseJson(data=data_lists.object_list).json()
 
     def post(self, request):
         id = request.POST.get('id')
@@ -130,7 +130,7 @@ class JobView(View):
             try:
                 data = Job.objects.get(id=id)
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
+                return HttpResponseJson(status=500, code=50001).json()
             if job:
                 data.job = job
             if company:
@@ -148,10 +148,10 @@ class JobView(View):
             if recruitment:
                 data.recruitment = recruitment
             data.save()
-            return HandleResponse({}, '修改成功').response_json()
+            return HttpResponseJson(data='修改成功').json()
         else:
             if not all([job, company, min_salary, max_salary, describe, working_years, education, recruitment]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
             Job.objects.create(
                 job=job,
                 company=Companys.objects.get(id=company),
@@ -162,15 +162,15 @@ class JobView(View):
                 education=education,
                 recruitment=recruitment
             )
-            return HandleResponse({}, '添加成功').response_json()
+            return HttpResponseJson(data='添加成功').json()
 
     def delete(self, request):
         id = request.GET.get('id')
 
         if not all([id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         Job.objects.filter(id=id).update(is_delete=True)
-        return HandleResponse({}, '删除成功').response_json()
+        return HttpResponseJson(data='删除成功').json()
 
 
 class WelfareView(View):
@@ -178,12 +178,12 @@ class WelfareView(View):
     def get(self, request):
         company = request.GET.get('company')
         if not all([company]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         try:
             data = Welfare.objects.filter(is_delete=False, company=Companys.objects.get(id=company))
-            return HandleResponse(data).response_json()
+            return HttpResponseJson(data).json()
         except:
-            return HandleResponse({}, '服务器错误', 40000).response_json()
+            return HttpResponseJson(status=500, code=50000).json()
 
     def post(self, request):
         id = request.POST.get('id')
@@ -194,29 +194,29 @@ class WelfareView(View):
             try:
                 data = Welfare.objects.get(id=id)
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
+                return HttpResponseJson(status=500, code=50001).json()
             if name:
                 data.name = name
             if company:
-                data.company = company
+                data.company = Companys.objects.get(id=company)
             data.save()
-            return HandleResponse({}, '修改成功').response_json()
+            return HttpResponseJson(data='修改成功').json()
         else:
             if not all([name, company]):
-                return HandleResponse({}, '参数错误', 20000).response_json()
+                return HttpResponseJson(status=400, code=40000).json()
             try:
                 Welfare.objects.create(
                     name=name,
                     company=Companys.objects.get(id=company)
                 )
-                return HandleResponse({}, '添加成功').response_json()
+                return HttpResponseJson(data='添加成功').json()
             except:
-                return HandleResponse({}, '服务器错误', 40000).response_json()
+                return HttpResponseJson(status=500, code=50000).json()
 
     def delete(self, request):
         id = request.GET.get('id')
 
         if not all([id]):
-            return HandleResponse({}, '参数错误', 20000).response_json()
+            return HttpResponseJson(status=400, code=40000).json()
         Welfare.objects.filter(id=id).update(is_delete=True)
-        return HandleResponse({}, '删除成功').response_json()
+        return HttpResponseJson(data='删除成功').json()
