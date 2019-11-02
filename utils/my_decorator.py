@@ -12,7 +12,7 @@ class MyDecorator:
             user = request.user
             if not user.is_authenticated:
                 # 用户未登录
-                return HttpResponseJson(status=400, code=40003).response_json()
+                return HttpResponseJson(status=400, code=40003).json()
             return self.func(request, *args, **kwargs)
 
         return wrapper

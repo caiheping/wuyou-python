@@ -11,7 +11,7 @@
  Target Server Version : 80016
  File Encoding         : 65001
 
- Date: 12/09/2019 17:19:10
+ Date: 02/11/2019 10:31:55
 */
 
 SET NAMES utf8mb4;
@@ -26,7 +26,7 @@ CREATE TABLE `auth_group`  (
   `name` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for auth_group_permissions
@@ -41,7 +41,7 @@ CREATE TABLE `auth_group_permissions`  (
   INDEX `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm`(`permission_id`) USING BTREE,
   CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for auth_permission
@@ -55,7 +55,7 @@ CREATE TABLE `auth_permission`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `auth_permission_content_type_id_codename_01ab375a_uniq`(`content_type_id`, `codename`) USING BTREE,
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 65 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 64 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_permission
@@ -136,7 +136,7 @@ CREATE TABLE `base_areainfo`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `base_areainfo_aParent_id_96b375a7_fk_base_areainfo_id`(`aParent_id`) USING BTREE,
   CONSTRAINT `base_areainfo_aParent_id_96b375a7_fk_base_areainfo_id` FOREIGN KEY (`aParent_id`) REFERENCES `base_areainfo` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 991401 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of base_areainfo
@@ -3413,7 +3413,23 @@ CREATE TABLE `base_banner`  (
   `image` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of base_banner
+-- ----------------------------
+INSERT INTO `base_banner` VALUES (1, '2019-10-08 06:32:36.984800', '2019-10-12 04:00:16.206539', 0, 44, 'banner/people_L0fS6XA.png', '123sdss');
+INSERT INTO `base_banner` VALUES (2, '2019-10-08 06:36:03.017001', '2019-10-10 02:48:22.003501', 0, 6, 'banner/noUpload.png', '123sdss');
+INSERT INTO `base_banner` VALUES (3, '2019-10-08 07:00:31.744127', '2019-10-08 07:00:31.744127', 0, 11, 'banner/people.png', 'ssss');
+INSERT INTO `base_banner` VALUES (4, '2019-10-08 08:04:25.750616', '2019-10-08 08:04:25.750616', 0, 11, 'banner/people_bFq6O2K.png', 'ssss');
+INSERT INTO `base_banner` VALUES (16, '2019-10-10 08:37:24.252671', '2019-10-10 08:37:24.252671', 0, 55, 'banner/people_WFTyDEU.png', '123sdss');
+INSERT INTO `base_banner` VALUES (17, '2019-10-10 09:06:46.993259', '2019-10-10 09:06:46.993259', 0, 55, 'banner/people_9TeUC5H.png', '123sdss');
+INSERT INTO `base_banner` VALUES (18, '2019-10-12 03:54:42.920698', '2019-10-12 06:12:23.190603', 0, 44, 'banner/people_zinjcs2.png', '12但是s');
+INSERT INTO `base_banner` VALUES (19, '2019-10-12 03:55:42.521171', '2019-10-12 05:36:48.501621', 0, 44, 'banner/people_NBLSBFJ.png', '123sdss');
+INSERT INTO `base_banner` VALUES (20, '2019-10-12 03:56:13.222047', '2019-10-12 03:56:13.222047', 0, 55, 'banner/people_YUDvTTq.png', '123sdss');
+INSERT INTO `base_banner` VALUES (21, '2019-10-12 03:56:57.770413', '2019-10-12 03:56:57.771410', 0, 55, 'banner/people_l9GAmZY.png', '123sdss');
+INSERT INTO `base_banner` VALUES (22, '2019-10-12 03:57:16.441480', '2019-10-12 03:57:16.441480', 1, 55, 'banner/people_PrsG9Gm.png', '123sdss');
+INSERT INTO `base_banner` VALUES (23, '2019-10-12 05:45:32.854050', '2019-10-12 05:45:32.854050', 0, 44, 'banner/people_h857adB.png', '123sdss');
 
 -- ----------------------------
 -- Table structure for companys_companys
@@ -3435,12 +3451,25 @@ CREATE TABLE `companys_companys`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `companys_companys_area_id_45eef961_fk_base_areainfo_id`(`area_id`) USING BTREE,
   CONSTRAINT `companys_companys_area_id_45eef961_fk_base_areainfo_id` FOREIGN KEY (`area_id`) REFERENCES `base_areainfo` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of companys_companys
 -- ----------------------------
 INSERT INTO `companys_companys` VALUES (2, '2019-09-12 09:16:18.940509', '2019-09-12 09:16:18.940509', 0, '飞飞飞', 'media/img0.jpg', 2, '广州番禺', '<p>飞飞飞</p>', 1, '2019-09-12', 110100);
+INSERT INTO `companys_companys` VALUES (3, '2019-10-08 09:34:57.790771', '2019-10-08 09:34:57.790771', 0, '小菜科技有限公司', 'media/img0_GHGbNNR.jpg', 2, '广州番禺', '<p>good</p>', 112, '2019-10-08', 110108);
+INSERT INTO `companys_companys` VALUES (4, '2019-10-08 09:35:29.179843', '2019-10-08 09:35:29.179843', 0, '牛你家', 'media/img0_NPs2iBK.jpg', 3, '广州番禺', '<p>特上他</p>', 9, '2019-10-08', 110103);
+INSERT INTO `companys_companys` VALUES (5, '2019-10-09 02:02:20.283956', '2019-10-09 02:02:20.283956', 0, '开讲啦', 'noUpload.png', 2, '番禺区', 'hhh', 44, '2019-09-12', 110100);
+INSERT INTO `companys_companys` VALUES (6, '2019-10-09 02:03:20.077288', '2019-10-12 06:12:37.337543', 0, '开讲啦ff', 'media/user_active_4kDVIQS.png', 2, '番禺区', 'hhh', 44, '2019-09-12', 110100);
+INSERT INTO `companys_companys` VALUES (7, '2019-10-09 02:12:44.873483', '2019-10-09 02:12:44.873483', 1, 'cai', 'media/img0_GHGbNNR.jpg', 2, '番禺区', 'hhh', 44, '2019-09-12', 110100);
+INSERT INTO `companys_companys` VALUES (8, '2019-10-10 02:02:57.473521', '2019-10-10 02:02:57.473521', 0, '开讲啦', 'media/user_default.png', 2, '番禺区', 'hhh', 44, '2019-09-12', 110100);
+INSERT INTO `companys_companys` VALUES (9, '2019-10-10 02:13:01.657674', '2019-10-10 02:13:01.657674', 0, '开讲啦', 'media/noUpload.png', 2, '番禺区', 'hhh', 44, '2019-09-12', 110100);
+INSERT INTO `companys_companys` VALUES (10, '2019-10-10 02:14:15.261294', '2019-10-10 02:14:15.261294', 0, '开讲啦', 'media/user_active.png', 2, '番禺区', 'hhh', 44, '2019-09-12', 110100);
+INSERT INTO `companys_companys` VALUES (11, '2019-10-10 02:16:35.391757', '2019-10-10 02:16:35.391757', 0, '开讲啦', 'media/user_active_grpVBxS.png', 2, '番禺区', 'hhh', 44, '2019-09-12', 110100);
+INSERT INTO `companys_companys` VALUES (12, '2019-10-10 02:17:09.180421', '2019-10-10 02:17:09.180421', 0, '开讲啦', 'media/user_active_T4xAqLZ.png', 2, '番禺区', 'hhh', 44, '2019-09-12', 110100);
+INSERT INTO `companys_companys` VALUES (13, '2019-10-10 02:54:58.169397', '2019-10-10 02:54:58.170394', 0, '开讲啦', 'media/user_active.png', 2, '番禺区', 'hhh', 44, '2019-09-12', 110100);
+INSERT INTO `companys_companys` VALUES (14, '2019-10-10 02:58:04.960960', '2019-10-10 02:58:04.961950', 0, '开讲啦sdfds', 'media/user_active_R9iDTct.png', 2, '番禺区', 'hhh', 44, '2019-09-12', 110100);
+INSERT INTO `companys_companys` VALUES (15, '2019-10-12 06:12:53.410232', '2019-10-12 06:12:53.410232', 0, '开讲啦ff', 'media/user_active.png', 2, '番禺区', 'hhh', 44, '2019-09-12', 110100);
 
 -- ----------------------------
 -- Table structure for companys_job
@@ -3462,7 +3491,15 @@ CREATE TABLE `companys_job`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `companys_job_company_id_f9579152_fk_companys_companys_id`(`company_id`) USING BTREE,
   CONSTRAINT `companys_job_company_id_f9579152_fk_companys_companys_id` FOREIGN KEY (`company_id`) REFERENCES `companys_companys` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of companys_job
+-- ----------------------------
+INSERT INTO `companys_job` VALUES (1, '2019-10-09 02:40:11.142529', '2019-10-09 02:40:11.142529', 0, 'java', 9999, 13999, '我很牛逼', 3, 2, 2, 3);
+INSERT INTO `companys_job` VALUES (2, '2019-10-09 02:40:44.594119', '2019-10-12 06:33:00.962146', 0, 'c++', 9999, 19999, '<p>是的</p>', 2, 4, 2, 3);
+INSERT INTO `companys_job` VALUES (3, '2019-10-09 02:51:09.599861', '2019-10-09 02:51:09.600858', 1, 'java', 9999, 13999, '士大夫', 3, 2, 2, 3);
+INSERT INTO `companys_job` VALUES (4, '2019-10-10 03:17:45.899947', '2019-10-10 03:17:45.899947', 0, 'java', 9999, 13999, '我很牛逼', 3, 2, 2, 3);
 
 -- ----------------------------
 -- Table structure for companys_welfare
@@ -3478,7 +3515,16 @@ CREATE TABLE `companys_welfare`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `companys_welfare_company_id_88743a69_fk_companys_companys_id`(`company_id`) USING BTREE,
   CONSTRAINT `companys_welfare_company_id_88743a69_fk_companys_companys_id` FOREIGN KEY (`company_id`) REFERENCES `companys_companys` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of companys_welfare
+-- ----------------------------
+INSERT INTO `companys_welfare` VALUES (1, '2019-10-09 03:03:28.075407', '2019-10-09 03:03:28.075407', 0, '五险一金', 3);
+INSERT INTO `companys_welfare` VALUES (2, '2019-10-09 03:22:38.980692', '2019-10-10 03:28:34.875700', 1, '社保', 2);
+INSERT INTO `companys_welfare` VALUES (3, '2019-10-09 03:26:16.769734', '2019-10-12 06:36:08.716040', 0, '美女如云', 2);
+INSERT INTO `companys_welfare` VALUES (4, '2019-10-10 03:28:09.762874', '2019-10-10 03:28:09.762874', 0, '六险一金', 2);
+INSERT INTO `companys_welfare` VALUES (5, '2019-10-12 06:34:25.474705', '2019-10-12 06:34:25.474705', 0, '美女如云', 2);
 
 -- ----------------------------
 -- Table structure for django_admin_log
@@ -3498,7 +3544,7 @@ CREATE TABLE `django_admin_log`  (
   INDEX `django_admin_log_user_id_c564eba6_fk_users_users_id`(`user_id`) USING BTREE,
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_users_users_id` FOREIGN KEY (`user_id`) REFERENCES `users_users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_admin_log
@@ -3507,6 +3553,32 @@ INSERT INTO `django_admin_log` VALUES (1, '2019-09-12 09:05:20.476824', '2', '�
 INSERT INTO `django_admin_log` VALUES (2, '2019-09-12 09:05:24.921964', '2', '小菜', 2, '[]', 6, 1);
 INSERT INTO `django_admin_log` VALUES (3, '2019-09-12 09:14:14.492373', '1', '小菜科技有限公司', 1, '[{\"added\": {}}]', 7, 1);
 INSERT INTO `django_admin_log` VALUES (4, '2019-09-12 09:16:18.946469', '2', '飞飞飞', 1, '[{\"added\": {}}]', 7, 1);
+INSERT INTO `django_admin_log` VALUES (5, '2019-10-08 02:11:13.586828', '2', 'cai', 2, '[{\"changed\": {\"fields\": [\"password\"]}}]', 6, 1);
+INSERT INTO `django_admin_log` VALUES (6, '2019-10-08 02:13:00.318392', '3', 'test', 1, '[{\"added\": {}}]', 6, 1);
+INSERT INTO `django_admin_log` VALUES (7, '2019-10-08 06:32:36.986767', '1', 'Banner object (1)', 1, '[{\"added\": {}}]', 15, 1);
+INSERT INTO `django_admin_log` VALUES (8, '2019-10-08 06:36:03.021988', '2', 'Banner object (2)', 1, '[{\"added\": {}}]', 15, 1);
+INSERT INTO `django_admin_log` VALUES (9, '2019-10-08 06:36:29.231610', '1', 'Banner object (1)', 2, '[{\"changed\": {\"fields\": [\"image\"]}}]', 15, 1);
+INSERT INTO `django_admin_log` VALUES (10, '2019-10-08 09:34:57.796755', '3', '小菜科技有限公司', 1, '[{\"added\": {}}]', 7, 1);
+INSERT INTO `django_admin_log` VALUES (11, '2019-10-08 09:35:29.184802', '4', '牛你家', 1, '[{\"added\": {}}]', 7, 1);
+INSERT INTO `django_admin_log` VALUES (12, '2019-10-09 02:02:20.290937', '5', 'sss', 1, '[{\"added\": {}}]', 7, 1);
+INSERT INTO `django_admin_log` VALUES (13, '2019-10-09 02:03:20.082275', '6', '零三零三零', 1, '[{\"added\": {}}]', 7, 1);
+INSERT INTO `django_admin_log` VALUES (14, '2019-10-09 02:40:11.144523', '1', 'web前端', 1, '[{\"added\": {}}]', 9, 1);
+INSERT INTO `django_admin_log` VALUES (15, '2019-10-09 02:40:44.596141', '2', 'web前端', 1, '[{\"added\": {}}]', 9, 1);
+INSERT INTO `django_admin_log` VALUES (16, '2019-10-09 03:03:28.077402', '1', '五险一金', 1, '[{\"added\": {}}]', 8, 1);
+INSERT INTO `django_admin_log` VALUES (17, '2019-10-09 05:57:15.902903', '1', 'test', 1, '[{\"added\": {}}]', 10, 1);
+INSERT INTO `django_admin_log` VALUES (18, '2019-10-09 06:21:25.504800', '1', '阿里巴巴', 1, '[{\"added\": {}}]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (19, '2019-10-09 06:32:21.229566', '2', '分隔符', 1, '[{\"added\": {}}]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (20, '2019-10-09 07:40:45.882762', '2', '五险一金', 1, '[{\"added\": {}}]', 10, 1);
+INSERT INTO `django_admin_log` VALUES (21, '2019-10-09 07:41:01.131358', '2', '五险一金', 3, '', 10, 1);
+INSERT INTO `django_admin_log` VALUES (22, '2019-10-09 08:39:01.018446', '4', 'test2', 1, '[{\"added\": {}}]', 6, 1);
+INSERT INTO `django_admin_log` VALUES (23, '2019-10-09 08:39:06.412340', '4', 'test2', 2, '[]', 6, 1);
+INSERT INTO `django_admin_log` VALUES (24, '2019-10-09 09:00:45.052081', '3', '梵蒂冈', 1, '[{\"added\": {}}]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (25, '2019-10-09 09:31:13.643618', '1', '北大', 1, '[{\"added\": {}}]', 14, 1);
+INSERT INTO `django_admin_log` VALUES (26, '2019-10-09 09:40:54.959620', '1', '广州', 1, '[{\"added\": {}}]', 13, 1);
+INSERT INTO `django_admin_log` VALUES (27, '2019-10-09 09:53:05.208930', '1', 'xiao项目', 1, '[{\"added\": {}}]', 12, 1);
+INSERT INTO `django_admin_log` VALUES (28, '2019-10-10 03:44:22.643368', '4', 'test2', 3, '', 6, 1);
+INSERT INTO `django_admin_log` VALUES (29, '2019-10-10 03:44:44.782174', '5', 'test2', 1, '[{\"added\": {}}]', 6, 1);
+INSERT INTO `django_admin_log` VALUES (30, '2019-10-10 03:44:50.594660', '5', 'test2', 2, '[]', 6, 1);
 
 -- ----------------------------
 -- Table structure for django_content_type
@@ -3518,7 +3590,7 @@ CREATE TABLE `django_content_type`  (
   `model` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `django_content_type_app_label_model_76bd3d3b_uniq`(`app_label`, `model`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_content_type
@@ -3550,7 +3622,7 @@ CREATE TABLE `django_migrations`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `applied` datetime(6) NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_migrations
@@ -3577,6 +3649,12 @@ INSERT INTO `django_migrations` VALUES (19, 'companys', '0001_initial', '2019-09
 INSERT INTO `django_migrations` VALUES (20, 'resumes', '0001_initial', '2019-09-12 09:02:50.055218');
 INSERT INTO `django_migrations` VALUES (21, 'resumes', '0002_resume_user', '2019-09-12 09:02:50.209777');
 INSERT INTO `django_migrations` VALUES (22, 'sessions', '0001_initial', '2019-09-12 09:02:50.267622');
+INSERT INTO `django_migrations` VALUES (23, 'base', '0002_auto_20191008_1435', '2019-10-08 06:35:28.112373');
+INSERT INTO `django_migrations` VALUES (24, 'base', '0003_auto_20191009_1030', '2019-10-09 02:30:23.520615');
+INSERT INTO `django_migrations` VALUES (25, 'companys', '0002_auto_20191009_1030', '2019-10-09 02:30:23.527568');
+INSERT INTO `django_migrations` VALUES (26, 'resumes', '0003_auto_20191009_1030', '2019-10-09 02:30:23.539564');
+INSERT INTO `django_migrations` VALUES (27, 'users', '0002_auto_20191009_1030', '2019-10-09 02:30:23.550534');
+INSERT INTO `django_migrations` VALUES (28, 'resumes', '0004_auto_20191009_1539', '2019-10-09 07:39:32.221873');
 
 -- ----------------------------
 -- Table structure for django_session
@@ -3594,6 +3672,9 @@ CREATE TABLE `django_session`  (
 -- Records of django_session
 -- ----------------------------
 INSERT INTO `django_session` VALUES ('4ocpdtahbmw4gv41febm1o17bqcpwpge', 'ZTMxNmI0NDNkZTlmZGUzYThmMzI1NTllMzUzZmUwODFmN2M3MmFlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzNDRlYmFkOWFmZGFlZGM1NjU1ZDZjMjA1MzMxMjhkMmY0NjRlMGUwIn0=', '2019-09-26 09:04:28.212655');
+INSERT INTO `django_session` VALUES ('itrsmwfmqmou8xcrwnyay0zc3mam9onx', 'NjMzYzRkNjQ3YjJlNmE2ZGFmMzY3YzIxODVlZjdmOTMwOTgyNWM2MDp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlOGE4NzJkYzJlZTUzODZlMGIxZTU2NTA1MDAwYmM5ZWM4MzRjMGNiIn0=', '2019-10-26 07:25:15.983845');
+INSERT INTO `django_session` VALUES ('iuczor88cjd0d19nlha2j1kjaax8r1u3', 'ZTMxNmI0NDNkZTlmZGUzYThmMzI1NTllMzUzZmUwODFmN2M3MmFlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzNDRlYmFkOWFmZGFlZGM1NjU1ZDZjMjA1MzMxMjhkMmY0NjRlMGUwIn0=', '2019-10-22 02:12:17.520713');
+INSERT INTO `django_session` VALUES ('wa3rza6h26m4nogtz315jdoni2458lfm', 'ZTMxNmI0NDNkZTlmZGUzYThmMzI1NTllMzUzZmUwODFmN2M3MmFlZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzNDRlYmFkOWFmZGFlZGM1NjU1ZDZjMjA1MzMxMjhkMmY0NjRlMGUwIn0=', '2019-10-11 02:56:44.496782');
 
 -- ----------------------------
 -- Table structure for resumes_resume
@@ -3622,9 +3703,15 @@ CREATE TABLE `resumes_resume`  (
   `marital_status` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `resumes_resume_user_id_0221d0a3_fk_users_users_id`(`user_id`) USING BTREE,
+  UNIQUE INDEX `resumes_resume_user_id_0221d0a3_uniq`(`user_id`) USING BTREE,
   CONSTRAINT `resumes_resume_user_id_0221d0a3_fk_users_users_id` FOREIGN KEY (`user_id`) REFERENCES `users_users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of resumes_resume
+-- ----------------------------
+INSERT INTO `resumes_resume` VALUES (1, '2019-10-09 05:57:15.898948', '2019-10-10 03:40:59.174092', 0, '牛逼的简历', 1, 50, '东方', 'resumes/upload_default_49NBLXV.png', 'female', '2000-09-10', '13433944623', 0, '2019-10-09', '北京', '5551346@qq.com', '440921199612136565', 99999, '中国', 0, 3);
+INSERT INTO `resumes_resume` VALUES (4, '2019-10-10 03:45:11.795329', '2019-10-12 06:44:11.819667', 0, '牛逼的简历', 0, 0, '东方', 'resumes/upload_default.png', 'female', NULL, '13433944623', 0, NULL, '北京', NULL, NULL, 0, NULL, 0, 5);
 
 -- ----------------------------
 -- Table structure for resumes_resumeeducation
@@ -3646,7 +3733,14 @@ CREATE TABLE `resumes_resumeeducation`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `resumes_resumeeducation_resume_id_458e42ce_fk_resumes_resume_id`(`resume_id`) USING BTREE,
   CONSTRAINT `resumes_resumeeducation_resume_id_458e42ce_fk_resumes_resume_id` FOREIGN KEY (`resume_id`) REFERENCES `resumes_resume` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of resumes_resumeeducation
+-- ----------------------------
+INSERT INTO `resumes_resumeeducation` VALUES (1, '2019-10-09 09:31:13.640628', '2019-10-09 09:31:13.640628', 0, '2017-07-14', '2019-09-26', '北大', 3, '计算机科学', NULL, 0, 1);
+INSERT INTO `resumes_resumeeducation` VALUES (2, '2019-10-09 09:37:38.244149', '2019-10-12 06:54:11.436514', 0, '2017-10-01', '2020-10-01', '北极大学', 1, '人工智能', '房贷首fdsf sdfds', 0, 4);
+INSERT INTO `resumes_resumeeducation` VALUES (3, '2019-10-10 04:01:26.809428', '2019-10-10 04:01:26.809428', 0, '2017-10-01', '2019-10-01', '北极大学', 1, '大数据', '房贷首fdsf sdfds', 0, 4);
 
 -- ----------------------------
 -- Table structure for resumes_resumejob
@@ -3670,7 +3764,14 @@ CREATE TABLE `resumes_resumejob`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `resumes_resumejob_resume_id_e2a564f7_fk_resumes_resume_id`(`resume_id`) USING BTREE,
   CONSTRAINT `resumes_resumejob_resume_id_e2a564f7_fk_resumes_resume_id` FOREIGN KEY (`resume_id`) REFERENCES `resumes_resume` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of resumes_resumejob
+-- ----------------------------
+INSERT INTO `resumes_resumejob` VALUES (1, '2019-10-09 09:40:54.956655', '2019-10-12 06:54:59.163276', 0, '佛山', 'js', 1, 9999, '物联网', '计算机', 1, 'goods', NULL, 1);
+INSERT INTO `resumes_resumejob` VALUES (4, '2019-10-10 05:45:24.230447', '2019-10-10 05:45:24.230447', 0, '佛山', 'js', 1, 9999, '物联网', '计算机', 1, 'good', NULL, 4);
+INSERT INTO `resumes_resumejob` VALUES (5, '2019-10-12 06:54:48.075350', '2019-10-12 06:54:48.075350', 0, '佛山', 'js', 1, 9999, '物联网', '计算机', 1, 'good', NULL, 1);
 
 -- ----------------------------
 -- Table structure for resumes_resumeprojectexperience
@@ -3691,7 +3792,15 @@ CREATE TABLE `resumes_resumeprojectexperience`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `resumes_resumeprojec_resume_id_0ebb3240_fk_resumes_r`(`resume_id`) USING BTREE,
   CONSTRAINT `resumes_resumeprojec_resume_id_0ebb3240_fk_resumes_r` FOREIGN KEY (`resume_id`) REFERENCES `resumes_resume` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of resumes_resumeprojectexperience
+-- ----------------------------
+INSERT INTO `resumes_resumeprojectexperience` VALUES (1, '2019-10-09 09:53:05.205938', '2019-10-09 09:53:05.205938', 0, '2018-09-03', '2019-09-10', 'xiao项目', '<p>房贷首付</p>', '<p>法国</p>', '阿里巴巴', 1);
+INSERT INTO `resumes_resumeprojectexperience` VALUES (2, '2019-10-09 10:02:52.509322', '2019-10-09 10:02:52.509322', 0, '2018-10-12', '2019-10-12', '好大的项目', '牛逼的一批', '不用解释', '', 1);
+INSERT INTO `resumes_resumeprojectexperience` VALUES (4, '2019-10-10 05:48:21.615151', '2019-10-12 06:56:02.760298', 0, '2018-10-12', '2019-10-12', '好大的项目，哈哈', '牛逼的一批', '看来附件是', 'gfdg dfgfd', 4);
+INSERT INTO `resumes_resumeprojectexperience` VALUES (5, '2019-10-12 06:55:46.134664', '2019-10-12 06:55:46.134664', 0, '2018-10-12', '2019-10-12', '好大的项目，哈哈', '牛逼的一批', '看来附件是', '', 4);
 
 -- ----------------------------
 -- Table structure for resumes_resumeworking
@@ -3716,7 +3825,14 @@ CREATE TABLE `resumes_resumeworking`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `resumes_resumeworking_resume_id_2b258ef0_fk_resumes_resume_id`(`resume_id`) USING BTREE,
   CONSTRAINT `resumes_resumeworking_resume_id_2b258ef0_fk_resumes_resume_id` FOREIGN KEY (`resume_id`) REFERENCES `resumes_resume` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of resumes_resumeworking
+-- ----------------------------
+INSERT INTO `resumes_resumeworking` VALUES (1, '2019-10-09 06:21:25.503831', '2019-10-09 06:21:25.503831', 0, '2015-10-13', '2019-10-13', '啦啦啦', '前端', '12346', NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `resumes_resumeworking` VALUES (2, '2019-10-09 06:32:21.226601', '2019-10-09 06:32:21.226601', 0, '2015-10-13', '2019-10-13', '啦啦啦', '前端', '12346', '计算机', '技术部', '', '', '', 1);
+INSERT INTO `resumes_resumeworking` VALUES (5, '2019-10-10 03:53:32.749980', '2019-10-12 06:45:20.979485', 0, '2015-10-13', '2019-10-13', '啦啦啦', '前端', '12346', '计算机', '技术二部', 'test', '', '', 4);
 
 -- ----------------------------
 -- Table structure for users_users
@@ -3741,13 +3857,14 @@ CREATE TABLE `users_users`  (
   `avatar` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users_users
 -- ----------------------------
-INSERT INTO `users_users` VALUES (1, 'pbkdf2_sha256$150000$YuQqUsRNBdP1$Qd672dnpfPj1RSsXnIE8AQID+PEuVvjaxM/Zt82J7lU=', '2019-09-12 09:04:28.203674', 1, 'admin', '', '', '123@qq.com', 1, 1, '2019-09-12 09:03:07.960296', '2019-09-12 09:03:08.142807', '2019-09-12 09:03:08.142807', 0, NULL, '');
-INSERT INTO `users_users` VALUES (2, 'pbkdf2_sha256$150000$Aq2Si9taFwvp$yU1/G12A9qEli+T8uCK7r5Ed6nXVQqrV37Pb+B5140s=', NULL, 0, '小菜', '', '', '', 0, 1, '2019-09-12 09:05:00.000000', '2019-09-12 09:05:20.473859', '2019-09-12 09:05:24.906005', 0, NULL, '');
+INSERT INTO `users_users` VALUES (1, 'pbkdf2_sha256$150000$YuQqUsRNBdP1$Qd672dnpfPj1RSsXnIE8AQID+PEuVvjaxM/Zt82J7lU=', '2019-10-12 07:20:19.755339', 1, 'admin', '', '', '123@qq.com', 1, 1, '2019-09-12 09:03:07.960296', '2019-09-12 09:03:08.142807', '2019-09-12 09:03:08.142807', 0, NULL, '123.jpg');
+INSERT INTO `users_users` VALUES (3, 'pbkdf2_sha256$150000$edCVchTqJ3QO$s27yNkGvV72P4V/Hk6dftASA8BVoyEhb+f9CXYSpZR0=', '2019-11-02 02:16:26.013583', 0, 'test', '', '', '', 0, 1, '2019-10-08 02:13:00.125935', '2019-10-08 02:13:00.316397', '2019-10-08 02:13:00.316397', 0, NULL, '');
+INSERT INTO `users_users` VALUES (5, 'pbkdf2_sha256$150000$ZGj0JMFyCrZu$Hz+GfaIGSMgPtx8CTUIm4HzPXBRBwvYbZhwhMc0+ElE=', NULL, 0, 'test2', '', '', '', 0, 1, '2019-10-10 03:44:00.000000', '2019-10-10 03:44:44.780179', '2019-10-10 03:44:50.577706', 0, NULL, '');
 
 -- ----------------------------
 -- Table structure for users_users_groups

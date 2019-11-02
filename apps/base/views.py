@@ -18,6 +18,7 @@ class AreaView(View):
         if request.GET.get('atitle'):
             atitle = request.GET.get('atitle')
         data = AreaInfo.objects.filter(atitle__contains=atitle)
+        print(data)
         return HttpResponseJson(data=data).json()
 
 
