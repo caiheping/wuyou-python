@@ -6,6 +6,27 @@ from django.conf import settings
 from utils.response import HttpResponseJson
 from utils.my_decorator import MyDecorator
 
+from django.core import serializers
+import json
+
+
+# 递归返回城市
+def recursion(allArea, data):
+    """
+    :param allArea: 所有城市列表
+    :param data: 返回的数据
+    :return:
+    """
+    for item in data:
+        item['children'] = []
+        for list in allArea:
+            if list['fields']['aParent'] == item['pk']:
+                item['children'].append(list)
+        if len(item['children']) != 0:
+            recursion(allArea, item['children'])
+
+    return data
+
 
 class AreaView(View):
     @method_decorator(MyDecorator.is_login)  # 通过给dispatch方法添加装饰器判断是否登录
@@ -15,11 +36,19 @@ class AreaView(View):
     def get(self, request):
         """查询区域api"""
         atitle = ''
+        data = json.loads(serializers.serialize("json", AreaInfo.objects.filter(atitle__contains=atitle)))
+        allArea = []
+        topArea = []
+        for item in data:
+            allArea.append(item)
+            if item['fields']['aParent'] == None:
+                topArea.append(item)
         if request.GET.get('atitle'):
             atitle = request.GET.get('atitle')
-        data = AreaInfo.objects.filter(atitle__contains=atitle)
-        print(data)
-        return HttpResponseJson(data=data).json()
+            dataLists = json.loads(serializers.serialize("json", AreaInfo.objects.filter(atitle__contains=atitle)))
+            return HttpResponseJson(data=recursion(allArea, dataLists)).json()
+        else:
+            return HttpResponseJson(data=recursion(allArea, topArea)).json()
 
 
 class BannerView(View):
@@ -31,7 +60,7 @@ class BannerView(View):
         """查询banner"""
         data = Banner.objects.filter(is_delete=False)
         for item in data:
-            item.image = 'http://'+request.META['HTTP_HOST']+settings.STATIC_URL+str(item.image)
+            item.image = 'http://' + request.META['HTTP_HOST'] + settings.STATIC_URL + str(item.image)
         return HttpResponseJson(data=data).json()
 
     def post(self, request):
@@ -53,7 +82,7 @@ class BannerView(View):
                 data.image = image
             data.save()
             return HttpResponseJson(data='修改成功').json()
-        else:   # 添加
+        else:  # 添加
             if not all([index, url, image]):
                 return HttpResponseJson(status=400, code=40000).json()
             Banner.objects.create(
